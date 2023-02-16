@@ -1,0 +1,31 @@
+{
+    "db":"[REDACTED (Database Login)]",
+    "token": "[REDACTED (MasterBotToken)]",
+    "errors": {
+        "fatal": "An internal error has occurred and stopped this execution. Developer has been alerted. Please contact the BDFDData API Support Team if this issue persists.",
+        "invalidpath": "The provided endpoint doesn't seem to exist on this api.",
+        "headers": {
+            "guildId": "You are missing a required request header - `guild-id`",
+            "userId": "You are missing a required request header - `user-id`",
+            "msgId": "You are missing a required request header - `msg-id`",
+            "appId": "You are missing a required request header - `app-id`",
+            "chanId": "You are missing a required request header - `chan-id`",
+            "timestamp": "You are missing a required request header - `timestamp`",
+            "custom": {
+                "url": "You are missing a required request header - `url`",
+                "method": "You are missing a required request header - `api-method`",
+                "disu": "You may only use a `discord.com/api/v10` url"
+            },
+            "authkey": {
+                "missing": "You are not authorized to preform this action as you are missing your API Auth Key. Join our Discord to get a free key!",
+                "invalid": "You are not authorized to preform this action as your API Auth Key is invalid. Join our Discord for help!",
+                "suspended": "You are not authorized to preform this action as your API Auth Key is suspended. Join our Discord for help!"
+            }
+        }
+    },
+    "info": {
+        "discord": "https://discord.gg/9s65BZDrbV",
+        "owner": "Rickყ#2006",
+        "last_announcement": "We will soon require API-Keys, Please join our Discord for more info!"
+    }
+}
