@@ -11,8 +11,8 @@ await db.on("ready", () => {
    console.log('Connected to Database')
       });
     })()
-const publichook = new Discord.WebhookClient({url: 'https://discord.com/api/webhooks/1064468364245860372/j-sGghbU7oF7Ks_J9almbKDvwcW5Z74heIZxWJoG3MSLyzUDNbcw8EcLTI5Cg7vZt222'})
-const privatehook = new Discord.WebhookClient({url: 'https://discord.com/api/webhooks/1064718241076887624/eZa7_5FkuE0hmZ0dGDLNaOlrA00Qo4yF6umrIOlLS1ppslPwfzAsil-hGsAq1ufoap-q'})
+const publichook = new Discord.WebhookClient({url: 'forgot to remove this lmao'})
+const privatehook = new Discord.WebhookClient({url: 'forgot to remove this lmao'})
 
         app.get('/', async(req, res) => {
    res.redirect('https://discord.gg/9s65BZDrbV') 
