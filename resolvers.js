@@ -35,10 +35,11 @@ module.exports = class resolvers {
 
                 let flags = new Discord.UserFlagsBitField(r?.user?.public_flags)?.toArray() ?? []
                 if (r?.avatar) re.avatar = r?.avatar ? 'https://cdn.discordapp.com/avatars/' + r?.user?.id + '/' + r?.avatar + (r?.avatar?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null
-                if (r?.user?.avatar?.startsWith(`a_`) || r?.user?.avatar_decoration || r?.avatar) flags.push('NitroSubscriber')
+                if (r?.user?.avatar?.startsWith(`a_`) || r?.user?.avatar_decoration || r?.user?.banner) flags.push('NitroSubscriber')
 
                 if (r?.user?.public_flags || r?.user?.public_flags === 0) r.user.public_flags = flags || null
                 if (r?.user?.avatar) r.user.avatar = r?.user?.avatar ? 'https://cdn.discordapp.com/avatars/' + r?.user?.id + '/' + r?.user?.avatar + (r?.user?.avatar?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null
+                if (r?.user?.banner) r.user.banner = r?.user?.banner ? 'https://cdn.discordapp.com/banners/' + r?.user?.id + '/' + r?.user?.banner + (r?.user?.banner?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null
                 if (r?.user?.avatar_decoration) r.user.avatar_decoration = r?.user?.avatar_decoration ? 'https://cdn.discordapp.com/avatar-decorations/' + r?.user?.id + '/' + r?.user?.avatar_decoration : null || null
             })
         } else {
@@ -47,10 +48,11 @@ module.exports = class resolvers {
             if (re?.communication_disabled_until) re.communication_disabled_until = (new Date(re.communication_disabled_until) / 1000)?.toFixed() || null
             let flags = new Discord.UserFlagsBitField(re?.user?.public_flags)?.toArray() ?? []
             if (re?.avatar) re.avatar = re?.avatar ? 'https://cdn.discordapp.com/avatars/' + re?.user?.id + '/' + re?.avatar + (re?.avatar?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null
-            if (re?.user?.avatar?.startsWith(`a_`) || re?.user?.avatar_decoration || re?.avatar) flags.push('NitroSubscriber')
+            if (re?.user?.avatar?.startsWith(`a_`) || re?.user?.avatar_decoration || re?.user?.banner) flags.push('NitroSubscriber')
 
             if (re?.user?.public_flags || re?.user?.public_flags === 0) re.user.public_flags = flags || null
             if (re?.user?.avatar) re.user.avatar = re?.user?.avatar ? 'https://cdn.discordapp.com/avatars/' + re?.user?.id + '/' + re?.user?.avatar + (re?.user?.avatar?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null
+            if (re?.user?.banner) re.user.banner = re?.user?.banner ? 'https://cdn.discordapp.com/banners/' + re?.user?.id + '/' + re?.user?.banner + (re?.user?.banner?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null
             if (re?.user?.avatar_decoration) re.user.avatar_decoration = re?.user?.avatar_decoration ? 'https://cdn.discordapp.com/avatar-decorations/' + re?.user?.id + '/' + re?.user?.avatar_decoration : null || null
         }
         return re;
@@ -275,7 +277,7 @@ Object.assign(count, JSON.parse(`{"${key}": "${value.length}"}`))
                 if (r?.guild?.icon) r.guild.icon = r.guild.icon ? 'https://cdn.discordapp.com/icons/' + r.guild.id + '/' + r.guild.icon + (r.guild?.icon?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
                 if (r?.guild?.banner) r.guild.banner = r.guild?.banner ? 'https://cdn.discordapp.com/banners/' + r.guild.id + '/' + r.guild?.banner + (r.guild?.banner?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
                 if (r?.guild?.system_channel_flags) r.guild.system_channel_flags = new Discord.SystemChannelFlagsBitField(r.guild?.system_channel_flags).toArray() || null;
-                if (r?.guild?.splash) r.guild.splash = r?.splash ? 'https://cdn.discordapp.com/splashes/' + r.guild.id + '/' + r.guild?.splash + (r.guild?.splash?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
+                if (r?.guild?.splash) r.guild.splash = r?.guild.splash ? 'https://cdn.discordapp.com/splashes/' + r.guild.id + '/' + r.guild?.splash + (r.guild?.splash?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
                 if (r?.guild?.discovery_splash) r.guild.discovery_splash = r?.discovery_splash ? 'https://cdn.discordapp.com/discovery_splashes/' + r.guild.id + '/' + r.guild?.discovery_splash + (r.guild?.discovery_splash?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
                 let flags = new Discord.UserFlagsBitField(r?.public_flags)?.toArray() ?? []
                 if (r?.inviter?.avatar?.startsWith(`a_`) || r?.inviter?.avatar_decoration) flags.push('NitroSubscriber')
@@ -289,7 +291,7 @@ Object.assign(count, JSON.parse(`{"${key}": "${value.length}"}`))
             if (re?.guild?.icon) re.guild.icon = re.guild?.icon ? 'https://cdn.discordapp.com/icons/' + re.guild.id + '/' + re?.guild.icon + (re.guild?.icon?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
             if (re?.guild?.banner) re.guild.banner = re.guild?.banner ? 'https://cdn.discordapp.com/banners/' + re.guild.id + '/' + re.guild?.banner + (re.guild?.banner?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
             if (re?.guild?.system_channel_flags) re.guild.system_channel_flags = new Discord.SystemChannelFlagsBitField(re.guild?.system_channel_flags).toArray() || null;
-            if (re?.guild?.splash) re.guild.splash = re?.splash ? 'https://cdn.discordapp.com/splashes/' + re.guild.id + '/' + re.guild?.splash + (re.guild?.splash?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
+            if (re?.guild?.splash) re.guild.splash = re?.guild.splash ? 'https://cdn.discordapp.com/splashes/' + re.guild.id + '/' + re.guild?.splash + (re.guild?.splash?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
             if (re?.guild?.discovery_splash) re.guild.discovery_splash = re?.discovery_splash ? 'https://cdn.discordapp.com/discovery_splashes/' + re.guild.id + '/' + re.guild?.discovery_splash + (re.guild?.discovery_splash?.startsWith(`a_`) ? '.gif' : '.jpg') : null || null;
             let flags = new Discord.UserFlagsBitField(re?.public_flags)?.toArray() ?? []
             if (re?.inviter?.avatar?.startsWith(`a_`) || re?.inviter?.avatar_decoration) flags.push('NitroSubscriber')

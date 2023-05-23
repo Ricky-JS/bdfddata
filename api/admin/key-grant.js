@@ -2,15 +2,15 @@ module.exports = {
     log:false,
     headers: ['user-id'], //only put REQUIRED headers.
     access: 'ADMIN',
-    endpoint: async (req, res, Discord, fetch, config, t, resolvers, db) => {
-    if ((await db.connection._readyState) !== 1) return res.send({status: 424, error: config.errors.unavailable, api: Object.assign(config.info, {ping : `${(Date.now() - t)}ms`})})
-let re = await fetch(`https://discord.com/api/v10/users/${req.headers['user-id']}`, {
+    endpoint: async (utils) => {
+    if ((await utils.db.connection._readyState) !== 1) return utils.res.send({status: 424, error: utils.config.errors.unavailable, api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
+let re = await utils.fetch(`https://discord.com/api/v10/users/${utils.req.headers['user-id']}`, {
     method: 'GET',
     headers: {
-        Authorization: `Bot ${config.token}`
+        Authorization: `Bot ${utils.config.token}`
     }
 }).then(res=>res.json())
-     if(!re?.id) return res.send({status:404, error: 'User cannot be found', api: Object.assign(config.info, {ping : `${(Date.now() - t)}ms`})})
+     if(!re?.id) return utils.res.send({status:404, error: 'User cannot be found', api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
      function makekey(length, type, key, value) {
             let result = '';
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -25,31 +25,31 @@ let re = await fetch(`https://discord.com/api/v10/users/${req.headers['user-id']
         
         async function checkdb(result, type, key, value) {
             let daresult;
-            let r = await db.get(`ApiTokens.${result}`)
-           if(r) /* regen, key already used */ return makekey(20);
+            let r = await utils.db.get(`ApiTokens.${result}`)
+           if(r) /* regen, key already used */ return makekey(50);
            else {
-            daresult = await db.set(`ApiTokens.${result}`, {
+            daresult = await utils.db.set(`ApiTokens.${result}`, {
             userId: re.id,
             admin: false,
             suspended: false,
             suspendedUntil: null
            })
-           return res.send({status:200, details: Object.assign(daresult[result], {token: result}), api: Object.assign(config.info, {ping : `${(Date.now() - t)}ms`})})
+           return utils.res.send({status:200, details: Object.assign(daresult[result], {token: result}), api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
         }
         }
 
         
-        let dbe = await db.get(`ApiTokens`)
+        let dbe = await utils.db.get(`ApiTokens`)
 
         for(const [key,value] of Object.entries(dbe)) {
             if(value?.userId === re.id) {
                 if(value?.suspended) {
-                    return res.send({status: 403, error: config.errors.headers.authkey.suspended, api: Object.assign(config.info, {ping : `${(Date.now() - t)}ms`})})
+                    return utils.res.send({status: 403, error: utils.config.errors.headers.authkey.suspended, api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
                 }
-                else return res.send({status: 409, error: 'Key for this user already exists. Regen using `/admin/key-regen`', api: Object.assign(config.info, {ping : `${(Date.now() - t)}ms`})})
+                else return utils.res.send({status: 409, error: 'Key for this user already exists. Regen using `/admin/key-regen`', api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
             }
             else {
-                if(Object.keys(dbe)[Object.keys(dbe).length-1] === key) /* if its last one*/ return makekey(20)
+                if(Object.keys(dbe)[Object.keys(dbe).length-1] === key) /* if its last one*/ return makekey(50)
             }
         }
 }

@@ -1,16 +1,16 @@
 module.exports = {
     log: true,
     headers: ['guild-id', 'bot-token'], //only put REQUIRED headers.
-    body: ['reason', 'emoji'], // only put REQUIRED params
+    body: ['emoji'], // only put REQUIRED params
     access: 'PUBLIC',
-    endpoint: async (req, res, Discord, fetch, config, t, resolvers) => {
-        let eid = req.body['emoji'] || null
-        let reason = req.body['reason'] || null
+    endpoint: async (utils) => {
+        let eid = utils.req.body['emoji'] || null
+        let reason = utils.req.body['reason'] || null
         let res2;
-        let re = await fetch(`https://discord.com/api/v10/guilds/${req.headers['guild-id']}/emojis/${eid}`, {
+        let re = await utils.fetch(`https://discord.com/api/v10/guilds/${utils.req.headers['guild-id']}/emojis/${eid}`, {
             method: 'DELETE',
             headers: {
-                Authorization: `Bot ${req.headers['bot-token']}`,
+                Authorization: `Bot ${utils.req.headers['bot-token']}`,
                 'X-Audit-Log-Reason': reason ? reason : 'No Reason Provided'
             },
         }).then(async res => {
@@ -22,6 +22,6 @@ module.exports = {
             }
     })
 //        this endpoint does not have anything to be resolved.
-    res.send({ status: 200, details: re, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
+    utils.res.send({ status: 200, details: re, api: Object.assign(utils.config.info, { ping: `${(Date.now() - utils.time)}ms` }) })
     }
 }

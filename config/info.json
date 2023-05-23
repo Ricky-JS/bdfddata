@@ -1,19 +1,21 @@
 {
-    "db":"[REDACTED]",
-    "token": "[REDACTED]",
-    "publichook": "[REDACTED]",
-    "privatehook": "[REDACTED]",
+    "db":"[REDACTED] (Database URI)",
+    "token": "[REDACTED] (Bot Token)",
+    "publichook": "[REDACTED] (Usage Logs Webhook)",
+    "privatehook": "[REDACTED] (Error Logs Webhook)",
     "errors": {
         "fatal": "An internal error has occurred and stopped this execution. Developer has been alerted. Please contact the BDFDData API Support Team if this issue persists.",
-        "unavailable": "An error occurred while contacting our Database. Please contact the BDFDDaya API Support Team if this issue persists.",
+        "unavailable": "An error occurred while contacting our Database. Please contact the BDFDData API Support Team if this issue persists.",
         "invalidpath": "The provided endpoint doesn't seem to exist on this api.",
         "headers": "You are missing a required request header",
         "body": "You are missing a required body parameter",
         "authkey": {
-                "missing": "You are not authorized to preform this action as you are missing your API Auth Key. Join our Discord to get a free key!",
-                "invalid": "You are not authorized to preform this action as your API Auth Key is invalid. Join our Discord for help!",
-                "suspended": "You are not authorized to preform this action as your API Auth Key is suspended. Join our Discord for help!",
-                "admin": "You are not authorized to preform this action as your API Auth Key is not in our Admin Database."
+                "missing": "You are not authorized to perform this action as you are missing your API Auth Key. Join our Discord to get a free key!",
+                "invalid": "You are not authorized to perform this action as your API Auth Key is invalid. Join our Discord for help!",
+                "suspended": "You are not authorized to perform this action as your API Auth Key is suspended. Join our Discord for help!",
+                "admin": "You are not authorized to perform this action as your API Auth Key is not in our Admin Database.",
+                "beta": "You are not authorized to perform this action as your API Auth Key is not enrolled in our Beta Program."
+
             }
     },
     "info": {

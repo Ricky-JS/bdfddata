@@ -3,12 +3,12 @@ module.exports = {
     headers: ['guild-id', 'bot-token'], //only put REQUIRED headers.
     body: ['event'], //only put REQUIRED params.
     access: 'PUBLIC',
-    endpoint: async (req, res, Discord, fetch, config, t, resolvers) => {
+    endpoint: async (utils) => {
         let res2;
-        let re = await fetch(`https://discord.com/api/v10/guilds/${req.headers['guild-id']}/scheduled-events/${req.body['event']}?with_user_count=true`, {
+        let re = await utils.fetch(`https://discord.com/api/v10/guilds/${utils.req.headers['guild-id']}/scheduled-events/${utils.req.body['event']}?with_user_count=true`, {
             method: 'DELETE',
             headers: {
-                Authorization: `Bot ${req.headers['bot-token']}`
+                Authorization: `Bot ${utils.req.headers['bot-token']}`
             }
         }).then(async res => {
             res2 = await res.clone(); 
@@ -19,6 +19,6 @@ module.exports = {
             }
     })
 //        this endpoint does not have anything to be resolved.
-res.send({ status: 200, details: re, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
+utils.res.send({ status: 200, details: re, api: Object.assign(utils.config.info, { ping: `${(Date.now() - utils.time)}ms` }) })
     }
 }

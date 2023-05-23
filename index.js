@@ -18,39 +18,39 @@ const publichook = new Discord.WebhookClient({ url: config.publichook })
 const privatehook = new Discord.WebhookClient({ url: config.privatehook })
 app.use(async (req, res) => {
     try {
-        if (req.path === '/') return res.redirect('https://discord.gg/9s65BZDrbV')
+        if (req.path === '/') return res.redirect(config.info.discord)
         else {
-            var t = Date.now()
+            var time = Date.now()
 
             let path = __dirname + '/api' + req.path.toLowerCase() + '.js';
             let auth = req.headers['apikey'] || null
             let key = await db.get(`ApiTokens.${auth}`) || null
 
             await fs.lstat(path, async (err, stats) => {
-                if (err) return res.send({ status: 404, error: `${config.errors.invalidpath}`, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
+                if (err) return res.send({ status: 404, error: `${config.errors.invalidpath}`, api: Object.assign(config.info, { ping: `${(Date.now() - time)}ms` }) })
                 else {
-                    if (!auth) return res.send({ status: 403, error: config.errors.authkey.missing, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
-                    if (!key) return res.send({ status: 403, error: config.errors.authkey.invalid, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
-                    if (key.suspended) return res.send({ status: 403, error: config.errors.authkey.suspended, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
+                    if (!auth) return res.send({ status: 403, error: config.errors.authkey.missing, api: Object.assign(config.info, { ping: `${(Date.now() - time)}ms` }) })
+                    if (!key) return res.send({ status: 403, error: config.errors.authkey.invalid, api: Object.assign(config.info, { ping: `${(Date.now() - time)}ms` }) })
+                    if (key.suspended) return res.send({ status: 403, error: config.errors.authkey.suspended, api: Object.assign(config.info, { ping: `${(Date.now() - time)}ms` }) })
                     let file = await require(path);
                     if (file.headers && file.headers !== []) {
                         for (const header of file.headers) {
-                            if (!req.headers[header]) return res.send({ status: 400, error: `${config.errors.headers} - \`${header}\``, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
+                            if (!req.headers[header]) return res.send({ status: 400, error: `${config.errors.headers} - \`${header}\``, api: Object.assign(config.info, { ping: `${(Date.now() - time)}ms` }) })
                         }    
                     }
                     if (file?.body && file?.body !== []) {
                         for (const param of file.body) {
-                            if (!req.body[param]) return res.send({ status: 400, error: `${config.errors.body} - \`${param}\``, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
+                            if (!req.body[param]) return res.send({ status: 400, error: `${config.errors.body} - \`${param}\``, api: Object.assign(config.info, { ping: `${(Date.now() - time)}ms` }) })
                         }
                 }
-                    if (file.access === 'ADMIN' && !key.admin) return res.send({ status: 403, error: config.errors.authkey.admin, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
-                    await file.endpoint(req, res, Discord, fetch, config, t, resolvers, db)
+                    if (file.access === 'ADMIN' && !key.admin) return res.send({ status: 403, error: config.errors.authkey.admin, api: Object.assign(config.info, { ping: `${(Date.now() - time)}ms` }) })
+                    await file.endpoint({req, res, Discord, fetch, config, time, resolvers, db})
                     if (file.log) publichook.send(`Endpoint \`${req.path}\` has been used!`)
                 }
             })
         }
     } catch (e) {
-        res.send({ status: 400, error: `${config.errors.fatal}`, api: Object.assign(config.info, { ping: `${(Date.now() - t)}ms` }) })
+        res.send({ status: 400, error: `${config.errors.fatal}`, api: Object.assign(config.info, { ping: `${(Date.now() - time)}ms` }) })
         privatehook.send({
             embeds: [
                 new Discord.EmbedBuilder()
@@ -65,6 +65,6 @@ app.use(async (req, res) => {
     }
 })
 
-app.listen(9696, () => {
+app.listen(6969, () => {
     console.log('[BDFDISCORD-DATA-API] Loaded API!  | Port ' + 6969)
 });
