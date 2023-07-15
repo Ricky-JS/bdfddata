@@ -1,16 +1,17 @@
 module.exports = {
     log:false,
+    rule: false,
     headers: ['user-id', 'oldapikey'], //only put REQUIRED headers.
     access: 'ADMIN',
     endpoint: async (utils) => {
-    if ((await utils.db.connection._readyState) !== 1) return utils.res.send({status: 424, error: utils.config.errors.unavailable, api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
+    if ((await utils.db.connection._readyState) !== 1) return utils.res.send({status: 424, error: utils.config.errors.unavailable, api: Object.assign(utils.config.infold, {ping : `${(Date.now() - utils.time)}ms`})})
 let re = await utils.fetch(`https://discord.com/api/v10/users/${utils.req.headers['user-id']}`, {
     method: 'GET',
     headers: {
         Authorization: `Bot ${utils.config.token}`
     }
 }).then(res=>res.json())
-     if(!re?.id) return utils.res.send({status:404, error: 'User cannot be found', api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
+     if(!re?.id) return utils.res.send({status:404, error: 'User cannot be found', api: Object.assign(utils.config.infold, {ping : `${(Date.now() - utils.time)}ms`})})
 
 
 
@@ -43,7 +44,7 @@ let re = await utils.fetch(`https://discord.com/api/v10/users/${utils.req.header
             await utils.db.set(result, cdb)
             await utils.db.delete(key)
            }
-           return utils.res.send({status:200, details: Object.assign(daresult[result], {token: result}), api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
+           return utils.res.send({status:200, details: Object.assign(daresult[result], {token: result}), api: Object.assign(utils.config.infold, {ping : `${(Date.now() - utils.time)}ms`})})
         }
         }
 
@@ -53,7 +54,7 @@ let re = await utils.fetch(`https://discord.com/api/v10/users/${utils.req.header
         for(const [key,value] of Object.entries(dbe)) {
             if(value?.userId === re.id) {
                 if(value?.suspended) {
-                    return utils.res.send({status: 403, error: utils.config.errors.headers.authkey.suspended, api: Object.assign(utils.config.info, {ping : `${(Date.now() - utils.time)}ms`})})
+                    return utils.res.send({status: 403, error: utils.config.errors.headers.authkey.suspended, api: Object.assign(utils.config.infold, {ping : `${(Date.now() - utils.time)}ms`})})
                 }
                 else return makekey(50, key, value) /* this is regen */
             }

@@ -1,8 +1,8 @@
 {
-    "db":"[REDACTED] (Database URI)",
-    "token": "[REDACTED] (Bot Token)",
-    "publichook": "[REDACTED] (Usage Logs Webhook)",
-    "privatehook": "[REDACTED] (Error Logs Webhook)",
+    "db":"REDACTED",
+    "token": "REDACTED",
+    "publichook": "REDACTED",
+    "privatehook": "REDACTED",
     "errors": {
         "fatal": "An internal error has occurred and stopped this execution. Developer has been alerted. Please contact the BDFDData API Support Team if this issue persists.",
         "unavailable": "An error occurred while contacting our Database. Please contact the BDFDData API Support Team if this issue persists.",
@@ -15,12 +15,19 @@
                 "suspended": "You are not authorized to perform this action as your API Auth Key is suspended. Join our Discord for help!",
                 "admin": "You are not authorized to perform this action as your API Auth Key is not in our Admin Database.",
                 "beta": "You are not authorized to perform this action as your API Auth Key is not enrolled in our Beta Program."
-
             }
     },
+    "infold": {
+        "discord": "https://discord.gg/9s65BZDrbV",
+        "documentation": "https://dadocs.rickyjs.xyz",
+        "owner": "Rickყ#2006",
+        "deprecation-warning": "You are using an outdated URL formation, please check the the documentation for updated formation!!"
+    },
+
     "info": {
         "discord": "https://discord.gg/9s65BZDrbV",
         "documentation": "https://dadocs.rickyjs.xyz",
-        "owner": "Rickყ#2006"
+        "owner": "@ricky.js"
     }
+
 }

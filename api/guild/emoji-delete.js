@@ -1,5 +1,6 @@
 module.exports = {
     log: true,
+    rule: false,
     headers: ['guild-id', 'bot-token'], //only put REQUIRED headers.
     body: ['emoji'], // only put REQUIRED params
     access: 'PUBLIC',
@@ -21,7 +22,6 @@ module.exports = {
                 return await res2.text
             }
     })
-//        this endpoint does not have anything to be resolved.
-    utils.res.send({ status: 200, details: re, api: Object.assign(utils.config.info, { ping: `${(Date.now() - utils.time)}ms` }) })
+    utils.res.send({ status: 200, details: re, api: Object.assign(utils.config.infold, { ping: `${(Date.now() - utils.time)}ms` }) })
     }
 }

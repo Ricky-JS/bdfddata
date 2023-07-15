@@ -1,5 +1,6 @@
 module.exports = {
     log: true,
+    rule: true,
     headers: ['guild-id', 'bot-token'], //only put REQUIRED headers.
     access: 'PUBLIC',
     endpoint: async (utils) => {
@@ -16,10 +17,10 @@ module.exports = {
 
       
         if(simple && simple === 'true') {
-            if(!Array.isArray(re)) return utils.res.send({ status: 400, details: 'Parameter `simple` can only be used on member list.', api: Object.assign(utils.config.info, { ping: `${(Date.now() - utils.time)}ms` }) })
-            result = await utils.resolvers.guild_channels_simple(re);
-        } else result = await utils.resolvers.guild_channels(re);
+            if(!Array.isArray(re)) return utils.res.send({ status: 400, details: 'Parameter `simple` can only be used on member list.', api: Object.assign(utils.config.infold, { ping: `${(Date.now() - utils.time)}ms` }) })
+            result = await utils.resolvers(re, 'simple');
+        } else result = await utils.resolver(re, 'default');
 
-        utils.res.send({ status: 200, details: result, api: Object.assign(utils.config.info, { ping: `${(Date.now() - utils.time)}ms` }) })
+        utils.res.send({ status: 200, details: result, api: Object.assign(utils.config.infold, { ping: `${(Date.now() - utils.time)}ms` }) })
        }
 }
