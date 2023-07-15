@@ -1,11 +1,12 @@
 const delay = ms => new Promise(res => setTimeout(res, ms));
 module.exports = {
     log: true,
+    rule: false,
     headers: ['msg-id', 'chan-id', 'bot-token'], //only put REQUIRED headers.
     body: ['emojis'], //only put REQUIRED parameters.
     access: 'PUBLIC',
     endpoint: async (utils) => {
-        if(!Array.isArray(utils.req.body['emojis'])) return utils.res.send({status: 400, error: "Body Parameter `emojis` must be sent as Array."});
+        if(!Array.isArray(utils.req.body['emojis'])) return utils.res.send({status: 400, error: "Body Parameter `emojis` must be sent as Array.", api: Object.assign(utils.config.infold, { ping: `${(Date.now() - utils.time)}ms` }) })
     let res2;
     let re;
         for await (let emoji of utils.req.body['emojis']) {
@@ -26,6 +27,6 @@ module.exports = {
         }
 
 //        let result = utils.resolvers.reactions(re);
-    utils.res.send({ status: 200, details: re, api: Object.assign(utils.config.info, { ping: `${(Date.now() - utils.time)}ms` }) })
+    utils.res.send({ status: 200, details: re, api: Object.assign(utils.config.infold, { ping: `${(Date.now() - utils.time)}ms` }) })
     }
 }

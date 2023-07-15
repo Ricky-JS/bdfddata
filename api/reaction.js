@@ -1,5 +1,6 @@
 module.exports = {
     log: true,
+    rule: true,
     headers: ['msg-id', 'chan-id', 'bot-token'], //only put REQUIRED headers.
     access: 'PUBLIC',
     endpoint: async (utils) => {
@@ -23,7 +24,7 @@ module.exports = {
 
 
 
-        let result = await utils.resolvers.reaction(re);
-        utils.res.send({ status: 200, details: result, api: Object.assign(utils.config.info, { ping: `${(Date.now() - utils.time)}ms` }) })
+        let result = await utils.resolver(re);
+        utils.res.send({ status: 200, details: result, api: Object.assign(utils.config.infold, { ping: `${(Date.now() - utils.time)}ms` }) })
     }
 }

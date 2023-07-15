@@ -1,5 +1,6 @@
 module.exports = {
     log: true,
+    rule: true,
     headers: ['guild-id', 'bot-token'], //only put REQUIRED headers.
     body: ['name', 'privacy_level', 'scheduled_start_time', 'entity_type'], //only put REQUIRED params.
     access: 'PUBLIC',
@@ -12,7 +13,7 @@ module.exports = {
             },
             body: JSON.stringify(utils.req.body)
         }).then(res => res.json())
-        let result = await utils.resolvers.guild_events(re);
-        utils.res.send({ status: 200, details: result, api: Object.assign(utils.config.info, { ping: `${(Date.now() - utils.time)}ms` }) })
+        let result = await utils.resolver(re);
+        utils.res.send({ status: 200, details: result, api: Object.assign(utils.config.infold, { ping: `${(Date.now() - utils.time)}ms` }) })
     }
 }
