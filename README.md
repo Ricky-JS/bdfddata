@@ -4,7 +4,10 @@ Dedicated to assisting BDFD users by providing an API that allows controlled usa
 Public Repo for BDFDData API! 
 
 - [Discord Support Server](https://discord.gg/9s65BZDrbV)
-- Owned and Maintained by Rickყ#2006
+- Owned and Maintained by @ricky.js (formally Rickყ#2006)
 
 
-## You are welcome to fork and modify everything, however if you release your own version, I ask for atleast some credit after spending countless hours on this :sob:
+## You will need
+- Discord Bot Token
+- Mongo Database
+Database is required if you wish to utilize /db endpoints and ApiKeys.
